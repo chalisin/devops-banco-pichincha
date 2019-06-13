@@ -1,0 +1,78 @@
+swagger: "2.0"
+info:
+  description: "Banco Pichincha - DevOps Technical assessment Carlos Yánez"
+  version: "1.0.0"
+  title: "DevOps Technical assessment Carlos Yánez"
+  contact:
+    email: "carlosyanezrubio@gmail.com"
+host: "https://7z5zk931f7.execute-api.us-east-1.amazonaws.com"
+basePath: "/DevOps"
+tags:
+- name: "devops"
+  description: "DevOps Endpoint"
+schemes:
+- "https"
+securityDefinitions:
+  APIKeyHeader:
+    type: "apiKey"
+    name: "X-Parse-REST-API-Key"
+    in: "header"
+security:
+- APIKeyHeader: []
+paths:
+  /DevOps:
+    post:
+      tags:
+      - "devops"
+      summary: "DevOps Technical assessment Carlos Yánez"
+      description: "DevOps Technical assessment Carlos Yánez"
+      operationId: "DevOps"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "Object for payload"
+        required: true
+        schema:
+          $ref: "#/definitions/DevOpsObject"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/ApiResponse"
+        400:
+          description: "Invalid status value"
+        401:
+          description: "Unauthorized"
+        403:
+          description: "Forbidden"
+        405:
+          description: "Invalid input"
+definitions:
+  DevOpsObject:
+    type: "object"
+    required:
+      - message
+      - to
+      - from
+      - timeToLifeSec
+    properties:
+      message:
+        type: "string"
+      to:
+        type: "string"
+      from:
+        type: "string"
+      timeToLifeSec:
+        type: "integer"
+        format: "int32"
+  ApiResponse:
+    type: "object"
+    properties:
+      message:
+        type: "string"

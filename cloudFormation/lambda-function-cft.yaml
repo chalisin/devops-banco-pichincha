@@ -1,0 +1,43 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  urlHostApi:
+    Type: String
+    Default: https://7z5zk931f7.execute-api.us-east-1.amazonaws.com
+  stageDeploy:
+    Type: String
+    Default: developer
+  s3BucketName:
+    Type: String
+    Default: 'devops-cyanez'
+  roleId:
+    Type: String
+    Default: 'arn:aws:iam::318809572658:role/intl-latam-ec-role-dev'
+  regionAws:
+    Type: String
+    Default: us-east-1
+  projectName:
+    Type: String
+    Default: devops
+Resources:
+  crearPoliza:
+    Type: 'AWS::Lambda::Function'
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      FunctionName:  !Join [ '-', [!Ref prefixName, !Ref projectName, 'ServiceFunction', !Ref stageDeploy] ]
+      Code:
+        S3Bucket:
+          !Ref s3BucketName
+        S3Key:
+          'ServiceFunction.zip'
+      Description: Service Function
+      MemorySize: 128
+      Timeout: 150
+      Role: !Ref roleId
+Outputs:
+  ServiceFunction:
+    Value:
+        !GetAtt ServiceFunction.Arn
+    Description: arn of lambda ServiceFunction
+    Export:
+        Name: !Sub "${AWS::StackName}-serviceFunction"

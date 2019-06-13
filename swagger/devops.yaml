@@ -6,7 +6,7 @@ info:
   contact:
     email: "carlosyanezrubio@gmail.com"
 host: "https://7z5zk931f7.execute-api.us-east-1.amazonaws.com"
-basePath: "/prod"
+basePath: "/DevOps"
 tags:
 - name: "devops"
   description: "DevOps Endpoint"
